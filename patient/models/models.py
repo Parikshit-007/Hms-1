@@ -1,23 +1,43 @@
 from django.db import models
-from cryptography.fernet import Fernet
-
-
-key = b'your_generated_key_here'
-cipher_suite = Fernet(key)
 
 class Patient(models.Model):
-    patient_id = models.AutoField(primary_key=True)
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-    health_record = models.ImageField()
+    PatientID = models.AutoField(primary_key=True)
+    FirstName = models.CharField(max_length=255)
+    LastName = models.CharField(max_length=255)
+    DOB = models.DateField()
+    Gender = models.CharField(max_length=10)
+    ContactNumber = models.CharField(max_length=15)
+    Address = models.TextField()
+    Email = models.EmailField()
 
-    def set_health_record(self, data):
-        encrypted_data = cipher_suite.encrypt(data.encode())
-        self.health_record = encrypted_data
+class PatientHistory(models.Model):
+    HistoryID = models.AutoField(primary_key=True)
+    PatientID = models.ForeignKey(Patient, on_delete=models.CASCADE)
+    MedicalHistoryDetails = models.TextField()
+    TreatmentDetails = models.TextField()
 
-    def get_health_record(self):
-        decrypted_data = cipher_suite.decrypt(self.health_record).decode()
-        return decrypted_data
+class PatientBilling(models.Model):
+    BillingID = models.AutoField(primary_key=True)
+    PatientID = models.ForeignKey(Patient, on_delete=models.CASCADE)
+    InvoiceDetails = models.TextField()
 
-    def __str__(self):
-        return f"{self.first_name} {self.last_name}"
+class PatientLedger(models.Model):
+    LedgerID = models.AutoField(primary_key=True)
+    PatientID = models.ForeignKey(Patient, on_delete=models.CASCADE)
+    TransactionDetails = models.TextField()
+
+class TreatmentInformation(models.Model):
+    TreatmentID = models.AutoField(primary_key=True)
+    PatientID = models.ForeignKey(Patient, on_delete=models.CASCADE)
+    TreatmentDetails = models.TextField()
+
+class PatientReminder(models.Model):
+    ReminderID = models.AutoField(primary_key=True)
+    PatientID = models.ForeignKey(Patient, on_delete=models.CASCADE)
+    ReminderDetails = models.TextField()
+
+class PatientVisitList(models.Model):
+    VisitID = models.AutoField(primary_key=True)
+    PatientID = models.ForeignKey(Patient, on_delete=models.CASCADE)
+    VisitDate = models.DateField()
+    Reason = models.TextField()
