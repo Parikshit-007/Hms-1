@@ -10,12 +10,16 @@ class IPDRegistration(models.Model):
     admission_date = models.DateField()
     ward = models.CharField(max_length=50)
     bed_number = models.CharField(max_length=20)
+    def __str__(self):
+        return f"{self.admission_id} - {self.patient.FirstName} {self.patient.LastName}"
 
 class IPDDeposit(models.Model):
     deposit_id = models.AutoField(primary_key=True)
     admission = models.ForeignKey(IPDRegistration, on_delete=models.CASCADE)
     deposit_amount = models.DecimalField(max_digits=10, decimal_places=2)
     deposit_date = models.DateField()
+    def __str__(self):
+        return f"{self.deposit_id} - {self.admission.patient.FirstName} {self.admission.patient.LastName}"
 
 class IPDDischarge(models.Model):
     discharge_id = models.AutoField(primary_key=True)

@@ -14,6 +14,13 @@ from ipd.serializers import (
 class IPDRegistrationListCreateView(generics.ListCreateAPIView):
     queryset = IPDRegistration.objects.all()
     serializer_class = IPDRegistrationSerializer
+    def get_queryset(self):
+      qs= IPDRegistration.objects.all()
+      title = self.request.query_params.get('title')
+      if title is not None:
+         qs= qs.filter(title__icontains=title)
+      return qs    
+    
 
 class IPDRegistrationRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = IPDRegistration.objects.all()

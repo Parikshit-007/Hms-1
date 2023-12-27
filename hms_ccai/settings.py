@@ -25,6 +25,7 @@ SECRET_KEY = 'django-insecure-et+d@@7n^2q87xmx1l@v=k-_*q+dx#i9*_wlt(5_n=e%6r$upf
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+DJONGO_DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -132,11 +133,32 @@ USE_L10N = True
 USE_TZ = True
 
 
+LOGGING = {
+    'version': 1,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django.db.backends': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+        },
+    },
+}
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'frontend', 'build', 'static')]
+STATICFILES_DIRS = [
+    # Other paths, if any
+    'C:\\Users\\ASUS\\OneDrive\\Desktop\\HMS\\hms_ccai\\frontend\\build\\static',
+]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Media files (uploads)
 MEDIA_URL = '/media/'
