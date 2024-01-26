@@ -42,7 +42,7 @@ class Depwisereport(models.Model):
 
 class RefDoctorReport(models.Model):
     report_id=models.AutoField(primary_key=True)        
-    ref_doc_id=models.TextField(dafault=1)
+    ref_doc_id=models.TextField(blank=False)
     Referrals_details=models.TextField(blank=False)
 
 class ConsultantDoctorReport(models.Model):
