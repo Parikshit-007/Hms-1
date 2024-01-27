@@ -20,5 +20,7 @@ urlpatterns = [
      path('api/ipd/', include('ipd.urls')),
     path('api/opd/', include('opd.urls')),
     path('api/accounts/', include('accounts.urls')),
+     path('api/patient_dashboard/', include('patient_dashboard.urls')),
+   # patient_dashboard
     #re_path(r'^.*', TemplateView.as_view(template_name='index.html')),
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
