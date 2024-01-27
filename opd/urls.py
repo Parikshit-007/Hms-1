@@ -15,7 +15,7 @@ from opd.views.views import (
 )
 
 urlpatterns = [
- path('api/opd-register/', OPD_REGISTERViewSet.as_view({'get': 'list', 'post': 'create'}), name='opd-register-list-create'),
+    path('api/opd-register/', OPD_REGISTERViewSet.as_view({'get': 'list', 'post': 'create'}), name='opd-register-list-create'),
     path('api/opd-register/<int:pk>/', OPD_REGISTERViewSet.as_view({'get': 'retrieve', 'put': 'update', 'delete': 'destroy'}), name='opd-register-detail'),
 
     path('api/opd-billing/', OPD_BillingViewSet.as_view({'get': 'list', 'post': 'create'}), name='opd-billing-list-create'),

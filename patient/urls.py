@@ -10,6 +10,8 @@ from patient.views.views import (
 )
 
 urlpatterns = [
+
+   # patient_dashboard
     path('api/patients/', PatientListCreateView.as_view(), name='api-patient-list-create'),
     path('api/patients/<int:pk>/', PatientRetrieveUpdateDestroyView.as_view(), name='api-patient-retrieve-update-destroy'),
 

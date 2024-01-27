@@ -11,9 +11,3 @@ from ipd.serializers import (
 )
 
 
-def search(self):
-    qs= IPDRegistration.objects.all()
-    title = self.request.qery_params.get('title')
-    if title is not None:
-        qs= qs.filter(title__icontains=title)
-    return qs    
